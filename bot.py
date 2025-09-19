@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv, dotenv_values, find_dotenv 
 import telebot
 import requests
+from io import BytesIO
 
 
 load_dotenv()
@@ -34,13 +35,18 @@ def location_handler(message):
 
 
 def fetchWeather(message): #fetch the weather data
+   
    location = message.text
    weather = generateWeather(location)
-   data = weather["current"]
-   weather_message = f"Here it is. \nTemperature: {data["temperature"]} \n{data["weather_descriptions"]}"
-   weather_image = data["weather_icons"] #will add bot to send photo 
+   data = weather["current"] #this is for the current weather only
 
+   weather_message = f"Here it is. \nTemperature: {data["temperature"]} \n{data["weather_descriptions"][0]}" #added [0] to get it from the list
+   weather_url = data["weather_icons"][0] #added [0] to get it from the list
 
+   response = requests.get(weather_url)
+   weather_image_data = BytesIO(response.content) #.content gets us the raw data instead of url. and BytesIO treats as if it were a real file without saving to hard drive.
+
+   bot.send_photo(message.chat.id, photo=weather_image_data)
    bot.send_message(message.chat.id, weather_message, parse_mode="Markdown")
 
 
