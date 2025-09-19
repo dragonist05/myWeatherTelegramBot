@@ -1,0 +1,1 @@
+This is a project I develop to learn how to code. I will develop this bot to a proper weather bot. 
