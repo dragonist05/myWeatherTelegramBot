@@ -40,7 +40,7 @@ def fetchWeather(message): #fetch the weather data
    weather = generateWeather(location)
    data = weather["current"] #this is for the current weather only
 
-   weather_message = f"Here it is. \nTemperature: {data["temperature"]} \n{data["weather_descriptions"][0]}" #added [0] to get it from the list
+   weather_message = f"Here it is. \nTemperature: {data["temperature"]} \nIt is {data["weather_descriptions"][0].lower()}.\nThe air quality idex according to US EPA is {data["air_quality"]["us-epa-index"][0]}" #added [0] to get it from the list
    weather_url = data["weather_icons"][0] #added [0] to get it from the list
 
    response = requests.get(weather_url)

@@ -1,1 +1,1 @@
-This is a project I develop to learn how to code. I will develop this bot to a proper weather bot. 
+This is a learning project. I used Weathestack API and pyTelegramBotAPI to develop a weather bot. It displays a weather icon and temperature and weahter description such as thunderstorm and air quality index. 
